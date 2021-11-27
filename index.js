@@ -17,7 +17,6 @@ const noGmAllowed = /^(gn|gm)(\s+|$)/i
 const secretChannel = /^!join$/
 
 client.on('messageCreate', async (message) => {
-  console.log('got message!', message.content)
   if (message.author.bot) {
     console.log('Do not reply to bots', message.author.tag)
     return
