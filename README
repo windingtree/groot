@@ -1,0 +1,19 @@
+# Robot Cow Bot
+
+Discord BOT
+
+## Required env vars
+
+**BOT_TOKEN**: Discord bot token
+
+## Running
+
+`yarn start`
+
+Alternatively, to test it will not fail on Heroku, install `heroku` cli and run:
+
+`heroku local`
+
+## Deploying
+
+Every push to `main` will trigger a build and deploy to Heroku
