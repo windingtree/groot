@@ -2,6 +2,8 @@
 
 Discord BOT
 
+[Invite it to your server](https://discord.com/api/oauth2/authorize?client_id=913903801033981952&permissions=2147560448&scope=bot)
+
 ## Required env vars
 
 **BOT_TOKEN**: Discord bot token
