@@ -1,4 +1,6 @@
-const { Client, Intents, Events, DMChannel } = require('discord.js')
+const { Client, Intents, DMChannel } = require('discord.js')
+const cowsay = require('cowsay')
+
 const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
@@ -16,6 +18,10 @@ client.on('ready', () => {
 const noGmAllowed = /^(gn|gm)(\s+|$)/i
 const secretChannel = /^!join$/
 
+function codeBlock(message) {
+  return '```' + message + '```'
+}
+
 client.on('messageCreate', async (message) => {
   try {
     if (message.author.bot) {
@@ -27,13 +33,17 @@ client.on('messageCreate', async (message) => {
       return
     }
     if (message.channel instanceof DMChannel) {
-      message.reply("I am a bot and can't reply, beep bop")
+      message.reply(
+        codeBlock(cowsay.say({ text: "I am a bot and can't reply, beep bop" }))
+      )
       return
     }
 
     if (secretChannel.test(message.content)) {
       const dmChannel = await message.author.createDM()
-      await dmChannel.send('There is no #cow-level 🤫')
+      await dmChannel.send(
+        codeBlock(cowsay.say({ text: 'There is no #cow-level 🤫', p: true }))
+      )
     } else if (noGmAllowed.test(message.content)) {
       await message.reply(
         'Please mooooove your `gm` and `gn` to the #gm channel'
