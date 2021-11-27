@@ -35,7 +35,7 @@ client.on('messageCreate', async (message) => {
     const dmChannel = await message.author.createDM()
     await dmChannel.send('There is no #cow-level 🤫')
   } else if (noGmAllowed.test(message.content)) {
-    await message.reply('This message is not allowed here. Go to #gm channel')
+    await message.reply('Please mooooove your `gm` and `gn` to the #gm channel')
     await message.delete()
   }
 })
