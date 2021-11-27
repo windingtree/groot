@@ -1,0 +1,20 @@
+{
+  "name": "robot-cow-bot",
+  "version": "0.0.0",
+  "description": "Robot Cow Discord bot",
+  "main": "index.js",
+  "author": "alfetopito",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "discord.js": "^13.3.1"
+  },
+  "engines": {
+    "node": "*",
+    "npm": "*"
+  },
+  "scripts": {
+    "test": "echo 'fuck off' && exit",
+    "start": "node index.js"
+  }
+}
