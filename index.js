@@ -17,24 +17,30 @@ const noGmAllowed = /^(gn|gm)(\s+|$)/i
 const secretChannel = /^!join$/
 
 client.on('messageCreate', async (message) => {
-  if (message.author.bot) {
-    console.log('Do not reply to bots', message.author.tag)
-    return
-  }
-  if (message.type !== 'DEFAULT') {
-    console.log('Can only interact with default messages', message.type)
-    return
-  }
-  if (message.channel instanceof DMChannel) {
-    message.reply("I am a bot and can't reply, beep bop")
-    return
-  }
+  try {
+    if (message.author.bot) {
+      console.log('Do not reply to bots', message.author.tag)
+      return
+    }
+    if (message.type !== 'DEFAULT') {
+      console.log('Can only interact with default messages', message.type)
+      return
+    }
+    if (message.channel instanceof DMChannel) {
+      message.reply("I am a bot and can't reply, beep bop")
+      return
+    }
 
-  if (secretChannel.test(message.content)) {
-    const dmChannel = await message.author.createDM()
-    await dmChannel.send('There is no #cow-level 🤫')
-  } else if (noGmAllowed.test(message.content)) {
-    await message.reply('Please mooooove your `gm` and `gn` to the #gm channel')
-    await message.delete()
+    if (secretChannel.test(message.content)) {
+      const dmChannel = await message.author.createDM()
+      await dmChannel.send('There is no #cow-level 🤫')
+    } else if (noGmAllowed.test(message.content)) {
+      await message.reply(
+        'Please mooooove your `gm` and `gn` to the #gm channel'
+      )
+      await message.delete()
+    }
+  } catch (e) {
+    console.error('Something failed handling a message', e)
   }
 })
