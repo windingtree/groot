@@ -17,6 +17,7 @@ client.on('ready', () => {
 
 const noGmAllowed = /^(gn|gm)(\s+|$)/i
 const secretChannel = /^!join$/
+const noCommands = /^!/
 
 function codeBlock(message) {
   return '```' + message + '```'
@@ -39,11 +40,18 @@ client.on('messageCreate', async (message) => {
       return
     }
 
-    if (secretChannel.test(message.content)) {
-      const dmChannel = await message.author.createDM()
-      await dmChannel.send(
-        codeBlock(cowsay.say({ text: 'There is no #cow-level 🤫', p: true }))
+    if (noCommands.test(message.content)) {
+      await message.reply(
+        'Not a valid command. Actually, there are no valid commands, stop that :angry:'
       )
+
+      if (secretChannel.test(message.content)) {
+        const dmChannel = await message.author.createDM()
+        await dmChannel.send(
+          codeBlock(cowsay.say({ text: 'There is no #cow-level 🤫', p: true }))
+        )
+      }
+      await message.delete()
     } else if (noGmAllowed.test(message.content)) {
       await message.reply(
         'Please mooooove your `gm` and `gn` to the #gm channel'
