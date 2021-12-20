@@ -18,6 +18,7 @@ client.on('ready', () => {
 const noGmAllowed = /^(gn|gm)(\s+|$)/i
 const secretChannel = /^!join$/
 const noCommands = /^!/
+const noChannelTags = /^\s*\<#\d+\>\s*$/
 
 function codeBlock(message) {
   return '```' + message + '```'
@@ -51,6 +52,9 @@ client.on('messageCreate', async (message) => {
           codeBlock(cowsay.say({ text: 'There is no #cow-level 🤫', p: true }))
         )
       }
+      await message.delete()
+    } else if (noChannelTags.test(message.content)) {
+      await message.reply('Please stop tagging channels with no reason')
       await message.delete()
     } else if (noGmAllowed.test(message.content)) {
       await message.reply(
