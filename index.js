@@ -32,6 +32,7 @@ const tokenPrice = /.*(what)?.*(token)? price.*/i
 const wenMoon = /.*(wh?en|where).*mo+n.*/i
 const wenLambo = /.*(wh?en|where).*lambo.*/i
 const contractAddress = /.*contract .*address.*/i
+const totalSupply = /.*(total|max|maximum|token) supply.*/i
 
 const wenMoonGifs = [
   'https://cdn.discordapp.com/attachments/869170255266734103/941755575073660959/44aafe91f10b22af690ccb7513d03779.gif',
@@ -119,6 +120,8 @@ client.on('messageCreate', async (message) => {
       await message.reply('It\' live!!! Check #announcements channel')
     } else if (contractAddress.test(message.content)) {
       await message.reply('vCOW contract addresses:\n-Mainnet: https://etherscan.io/address/0xd057b63f5e69cf1b929b356b579cba08d7688048\n-Gnosis Chain: https://blockscout.com/xdai/mainnet/token/0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB')
+    } else if (totalSupply.test(message.content)) {
+      await message.reply('vCOW\'s total supply is 1 Billion.\n\nKeep in mind not everything will be in circulation because most will have a 4 year vesting period. For more info, check https://forum.gnosis.io/t/gip-13-phase-2-cowdao-and-cow-token/2735')
     }
   } catch (e) {
     console.error('Something failed handling a message', e)
