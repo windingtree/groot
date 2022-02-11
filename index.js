@@ -21,7 +21,7 @@ const noCommands = /^!/
 const noChannelTags = /^\s*\<#\d+\>\s*$/
 
 // auto-replies
-const wenToken = /.*wh?en (token|airdrop|drop|claim).*/i
+const wenToken = /.*wh?en .*(token|airdrop|drop|claim).*/i
 const whereToken = /.*where (to |.*)(claim|airdrop).*/i
 const howToClaim = /.*(how) (.*)(claim|airdrop).*/i
 const whenTrade = /.*(wh?en|how|where) .*(trade|exchange|swap|sell).*/i
