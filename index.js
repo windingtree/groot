@@ -101,10 +101,8 @@ client.on('messageCreate', async (message) => {
         'Please mooooove your `gm` and `gn` to the #gm channel'
       )
       await message.delete()
-    } else if (wenToken.test(message.content)) {
-      await message.reply('Soon! Check #announcements channel')
     } else if (whereToken.test(message.content)) {
-      await message.reply('It will be visible on CowSwap once it is ready')
+      await message.reply('https://cowswap.exchange/#/claim')
     } else if (howToClaim.test(message.content)) {
       await message.reply('Follow the instructions on https://medium.com/@cow-protocol/step-by-step-guide-for-claiming-vcow-in-gnosis-chain-b1a1442a3454')
     } else if (whenTrade.test(message.content) || sellToken.test(message.content)) {
@@ -115,6 +113,8 @@ client.on('messageCreate', async (message) => {
       await message.reply(pickMoon())
     } else if (wenLambo.test(message.content)) {
       await message.reply(pickLambo())
+    } else if (wenToken.test(message.content)) {
+      await message.reply('It\' live!!! Check #announcements channel')
     }
   } catch (e) {
     console.error('Something failed handling a message', e)
