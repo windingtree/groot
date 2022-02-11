@@ -30,6 +30,19 @@ const sellToken = /.*(where|how|wh?en).*(sell).*/i
 const tokenPrice = /.*(what)?.*(token)? price.*/i
 const wenMoon = /.*wh?en.*(mo+n|lambo).*/i
 
+const wenMoonGifs = ['https://cdn.discordapp.com/attachments/869170255266734103/941755575073660959/44aafe91f10b22af690ccb7513d03779.gif',
+  'https://c.tenor.com/YZWhYF-xV4kAAAAd/when-moon-admin.gif', 'https://c.tenor.com/5bScutaRZWgAAAAd/travolta-safemoon.gif', 'https://c.tenor.com/x-kqDAmw2NQAAAAC/parrot-party.gif']
+
+let lastMoonIndex = -1
+
+function getMoonGif() {
+  lastMoonIndex += 1
+  if (lastMoonIndex > wenMoonGifs.length - 1) {
+    lastMoonIndex = 0
+  }
+  return wenMoonGifs[lastMoonIndex]
+}
+
 function codeBlock(message) {
   return '```' + message + '```'
 }
@@ -82,7 +95,7 @@ client.on('messageCreate', async (message) => {
     } else if (tokenPrice.test(message.content)) {
       await message.reply('The price for investing is 0.15 USD per vCOW. The equivalent in GNO, ETH and xDAI (according to what option you have, if any) was defined at the proposal creation time.\nSee https://forum.gnosis.io/t/gip-13-phase-2-cowdao-and-cow-token/2735 or Pinned messages on #general for more details')
     } else if (wenMoon.test(message.content)) {
-      await message.reply('<imagine a funny moon related joke gif>')
+      await message.reply(getMoonGif())
     }
   } catch (e) {
     console.error('Something failed handling a message', e)
