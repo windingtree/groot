@@ -28,20 +28,37 @@ const whenTrade = /.*(wh?en|how|where) .*(trade|exchange|swap|sell).*/i
 const whenGovernance = /a/i
 const sellToken = /.*(where|how|wh?en).*(sell).*/i
 const tokenPrice = /.*(what)?.*(token)? price.*/i
-const wenMoon = /.*wh?en.*(mo+n|lambo).*/i
+const wenMoon = /.*(wh?en|where).*mo+n.*/i
+const wenLambo = /.*(wh?en|where).*lambo.*/i
 
-const wenMoonGifs = ['https://cdn.discordapp.com/attachments/869170255266734103/941755575073660959/44aafe91f10b22af690ccb7513d03779.gif',
-  'https://c.tenor.com/YZWhYF-xV4kAAAAd/when-moon-admin.gif', 'https://c.tenor.com/5bScutaRZWgAAAAd/travolta-safemoon.gif', 'https://c.tenor.com/x-kqDAmw2NQAAAAC/parrot-party.gif']
+const wenMoonGifs = [
+  'https://cdn.discordapp.com/attachments/869170255266734103/941755575073660959/44aafe91f10b22af690ccb7513d03779.gif',
+  'https://c.tenor.com/YZWhYF-xV4kAAAAd/when-moon-admin.gif', 
+  'https://c.tenor.com/x-kqDAmw2NQAAAAC/parrot-party.gif', 
+  'https://cdn.discordapp.com/attachments/941725405554024539/941764782711767120/ezgif.com-gif-maker_72.gif',
+  'https://c.tenor.com/R6Zf7aUegagAAAAd/lambo.gif',
+]
 
-let lastMoonIndex = -1
+const wenLamboGifs = [
+  'https://c.tenor.com/5bScutaRZWgAAAAd/travolta-safemoon.gif', 
+  'https://c.tenor.com/_dae-kRV6jUAAAAS/lambo-cardboard.gif',
+  'https://c.tenor.com/R6Zf7aUegagAAAAd/lambo.gif',
+  'https://cdn.discordapp.com/attachments/941725405554024539/941768562509500446/ezgif.com-gif-maker_73.gif',
+]
 
-function getMoonGif() {
-  lastMoonIndex += 1
-  if (lastMoonIndex > wenMoonGifs.length - 1) {
-    lastMoonIndex = 0
+function pickFromList(list) {
+  let count = 0
+  return () => {
+    count += 1
+    if (count > list.length - 1) {
+      count = 0
+    }
+    return list[count]
   }
-  return wenMoonGifs[lastMoonIndex]
 }
+
+const pickMoon = pickFromList(wenMoonGifs)
+const pickLambo = pickFromList(wenLamboGifs)
 
 function codeBlock(message) {
   return '```' + message + '```'
@@ -95,7 +112,9 @@ client.on('messageCreate', async (message) => {
     } else if (tokenPrice.test(message.content)) {
       await message.reply('The price for investing is 0.15 USD per vCOW. The equivalent in GNO, ETH and xDAI (according to what option you have, if any) was defined at the proposal creation time.\nSee https://forum.gnosis.io/t/gip-13-phase-2-cowdao-and-cow-token/2735 or Pinned messages on #general for more details')
     } else if (wenMoon.test(message.content)) {
-      await message.reply(getMoonGif())
+      await message.reply(pickMoon())
+    } else if (wenLambo.test(message.content)) {
+      await message.reply(pickLambo())
     }
   } catch (e) {
     console.error('Something failed handling a message', e)
