@@ -52,7 +52,7 @@ const wenLamboGifs = [
 ]
 
 function pickFromList(list) {
-  let count = 0
+  let count = -1
   return () => {
     count += 1
     if (count > list.length - 1) {
