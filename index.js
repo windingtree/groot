@@ -36,6 +36,7 @@ const totalSupply = /.*(total|max|maximum|token) supply.*/i
 const addGChain = /.*add (gchain|gnosis ?chain|xdai)( to (mm|metamask|mmask|wallet))?.*/i
 
 const wenMoonGifs = [
+  'https://cdn.discordapp.com/attachments/941725405554024539/942843922483413042/ezgif.com-gif-maker_78.gif',
   'https://cdn.discordapp.com/attachments/869170255266734103/941755575073660959/44aafe91f10b22af690ccb7513d03779.gif',
   'https://c.tenor.com/YZWhYF-xV4kAAAAd/when-moon-admin.gif', 
   'https://c.tenor.com/x-kqDAmw2NQAAAAC/parrot-party.gif', 
