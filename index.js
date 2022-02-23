@@ -111,7 +111,7 @@ client.on('messageCreate', async (message) => {
     } else if (howToClaim.test(message.content)) {
       await message.reply('Follow the instructions on https://medium.com/@cow-protocol/step-by-step-guide-for-claiming-vcow-in-gnosis-chain-b1a1442a3454')
     } else if (whenTrade.test(message.content) || sellToken.test(message.content) || isTradeable.test(message.content)) {
-      await message.reply('vCOW is a non-transferable governance token. CowDAO might vote to make it swapable via governance vote.\nWen? After airdop is complete\nWen? 6 weeks after initial deployment\nWen? Aprox. March 25th')
+      await message.reply('vCOW is a non-transferable governance token. CowDAO might vote to make it swapable via governance vote.\nWen? After airdrop is complete\nWen? 6 weeks after initial deployment\nWen? Aprox. March 25th')
     } else if (tokenPrice.test(message.content)) {
       await message.reply('The price for investing is 0.15 USD per vCOW. The equivalent in GNO, ETH and xDAI (according to what option you have, if any) was defined at the proposal creation time.\nSee https://forum.gnosis.io/t/gip-13-phase-2-cowdao-and-cow-token/2735 or Pinned messages on #general for more details')
     } else if (wenMoon.test(message.content)) {
