@@ -18,6 +18,7 @@ client.on('ready', () => {
 const noGmAllowed = /^(gn|gm)(\s+|$)/i
 const secretChannel = /^!join$/
 const noCommands = /^!/
+const verifyCommand = /^!verify/
 const noChannelTags = /^\s*\<#\d+\>\s*$/
 
 // auto-replies
@@ -86,9 +87,12 @@ client.on('messageCreate', async (message) => {
       return
     }
 
-    if (noCommands.test(message.content)) {
+    if (verifyCommand.test(message.content)) {
+      await message.reply('You are close, buddy. Try `/verify` instead')
+      await message.delete()
+    } else if (noCommands.test(message.content)) {
       await message.reply(
-        'Not a valid command. Actually, there are no valid commands, stop that :angry:'
+        'Not a valid command. Maybe try `/verify` on #verify-here ?',
       )
 
       if (secretChannel.test(message.content)) {
