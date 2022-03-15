@@ -22,12 +22,11 @@ const verifyCommand = /^!verify/
 const noChannelTags = /^\s*\<#\d+\>\s*$/
 
 // auto-replies
-const wenToken = /.*wh?en .*(token|airdrop|drop|claim).*/i
 const whereToken = /.*where (to |.*)(claim|airdrop).*/i
 const howToClaim = /.*(how) (.*)(claim|airdrop).*/i
 const whenTrade = /.*(wh?en|how|where) .*(trade|exchange|swap|sell|listing).*/i
 const isTradeable = /.*(is|can) (trade(able)?|list(ed)?).*/i
-const whenGovernance = /a/i
+const wenVote = /a.*(wh?en) .*(vote).*/i
 const sellToken = /.*(where|how|wh?en).*(sell).*/i
 const tokenPrice = /.*(what)?.*(token)? price.*/i
 const wenMoon = /.*(wh?en|where).*mo+n.*/i
@@ -132,8 +131,8 @@ client.on('messageCreate', async (message) => {
       await message.reply(pickMoon())
     } else if (wenLambo.test(message.content)) {
       await message.reply(pickLambo())
-    } else if (wenToken.test(message.content)) {
-      await message.reply("It' live!!! Check #announcements channel")
+    } else if (wenVote.test(message.content)) {
+      await message.reply("Any active vote will be visible on the snapshot page https://snapshot.org/#/cow.eth. For current proposal in the discussion phase, check the forum (https://forum.cow.fi)")
     } else if (contractAddress.test(message.content)) {
       await message.reply(
         'vCOW contract addresses:\n-Mainnet: https://etherscan.io/address/0xd057b63f5e69cf1b929b356b579cba08d7688048\n-Gnosis Chain: https://blockscout.com/xdai/mainnet/token/0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB',
