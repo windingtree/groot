@@ -16,6 +16,7 @@ client.on('ready', () => {
 })
 
 const noGmAllowed = /^(gn|gm)(\s+|$)/i
+const noHello = /^(hi+|hey|hello|h?ola)!?\s*$/i
 const secretChannel = /^!join$/
 const noCommands = /^!/
 const verifyCommand = /^!verify/
@@ -69,6 +70,14 @@ function codeBlock(message) {
   return '```' + message + '```'
 }
 
+function helloMsgReply(msg) {
+  if (msg.length < 2) {
+    return 'Hi'
+  }
+  const normalized = msg.replace(/\s+/g, ' ').toLowerCase()
+  return `${normalized[0].toUpperCase()}${normalized.substring(1)}`
+}
+
 client.on('messageCreate', async (message) => {
   try {
     if (message.author.bot) {
@@ -107,6 +116,11 @@ client.on('messageCreate', async (message) => {
     } else if (noGmAllowed.test(message.content)) {
       await message.reply(
         'Please mooooove your `gm` and `gn` to the #gm channel',
+      )
+      await message.delete()
+    } else if (noHello.test(message.content)) {
+      await message.reply(
+        `${helloMsgReply(message.content)} nice to see you too! Next time please move your \`hi\` messages to the #gm channel`,
       )
       await message.delete()
     } else if (whereToken.test(message.content)) {
