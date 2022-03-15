@@ -121,7 +121,7 @@ client.on('messageCreate', async (message) => {
       isTradeable.test(message.content)
     ) {
       await message.reply(
-        'vCOW is a non-transferable governance token. CowDAO might vote to make it swapable via governance vote.\nWen? After airdrop is complete\nWen? 6 weeks after initial deployment\nWen? Aprox. March 25th',
+        'vCOW is a non-transferable governance token. CowDAO might vote to make it swapable via governance vote.\nFor details, check the discussion in the forum https://forum.cow.fi/t/cip-draft-enable-swapping-of-vcow-to-cow/91'
       )
     } else if (tokenPrice.test(message.content)) {
       await message.reply(
