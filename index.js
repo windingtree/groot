@@ -137,10 +137,6 @@ client.on('messageCreate', async (message) => {
       await message.reply(
         'The vote to swap vCOW for transferable COW is live! Participate in the voting here :point_right: https://snapshot.org/#/cow.eth/proposal/0x7f2d0e26225fec1dd19ae4870532a09014a69f2d973dde0a7b8296d556f221df.\nIf the proposal passes vCOW becomes swappable on March 28th!'
       )
-    } else if (tokenPrice.test(message.content)) {
-      await message.reply(
-        'The price for investing is 0.15 USD per vCOW. The equivalent in GNO, ETH and xDAI (according to what option you have, if any) was defined at the proposal creation time.\nSee https://forum.gnosis.io/t/gip-13-phase-2-cowdao-and-cow-token/2735 or Pinned messages on #general for more details',
-      )
     } else if (wenMoon.test(message.content)) {
       await message.reply(pickMoon())
     } else if (wenLambo.test(message.content)) {
