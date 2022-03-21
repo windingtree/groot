@@ -135,7 +135,7 @@ client.on('messageCreate', async (message) => {
       isTradeable.test(message.content)
     ) {
       await message.reply(
-        'vCOW is a non-transferable governance token. CowDAO might vote to make it swapable via governance vote.\nFor details, check the discussion in the forum https://forum.cow.fi/t/cip-draft-enable-swapping-of-vcow-to-cow/91'
+        'The vote to swap vCOW for transferable COW is live! Participate in the voting here :point_right: https://snapshot.org/#/cow.eth/proposal/0x7f2d0e26225fec1dd19ae4870532a09014a69f2d973dde0a7b8296d556f221df.\nIf the proposal passes vCOW becomes swappable on March 28th!'
       )
     } else if (tokenPrice.test(message.content)) {
       await message.reply(
