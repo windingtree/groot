@@ -1,4 +1,4 @@
-const { Client, Intents, DMChannel } = require('discord.js')
+const { Client, Intents, DMChannel, MessageEmbed } = require('discord.js')
 const cowsay = require('cowsay')
 
 const client = new Client({
@@ -78,6 +78,24 @@ function helloMsgReply(msg) {
   return `${normalized[0].toUpperCase()}${normalized.substring(1)}`
 }
 
+const ADDRESSES_EMBEDDED_MSG = new MessageEmbed()
+  .setTitle('CowDAO relevant addresses')
+  .addField(
+    'Ethereum',
+    `
+  - CowDAO Safe: [\`eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662\`](https://gnosis-safe.io/app/eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662)
+  - COW Token: [\`0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB\`](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB)
+  - vCOW: [\`0xD057B63f5E69CF1B929b356b579Cba08D7688048\`](https://etherscan.io/token/0xD057B63f5E69CF1B929b356b579Cba08D7688048)`,
+  )
+  .addField(
+    'Gnosis Chain',
+    `
+  - CowDAO Safe:  [\`gno:0xcA771eda0c70aA7d053aB1B25004559B918FE662\`](https://gnosis-safe.io/app/gno:0xcA771eda0c70aA7d053aB1B25004559B918FE662)
+  - COW Token: [\`0x177127622c4A00F3d409B75571e12cB3c8973d3c\`](https://blockscout.com/xdai/mainnet/token/0x177127622c4A00F3d409B75571e12cB3c8973d3c)
+  - vCOW: [\`0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB\`](https://blockscout.com/xdai/mainnet/token/0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB)
+  `,
+  )
+
 client.on('messageCreate', async (message) => {
   try {
     if (message.author.bot) {
@@ -144,16 +162,7 @@ client.on('messageCreate', async (message) => {
     } else if (wenVote.test(message.content)) {
       await message.reply("Any active vote will be visible on the snapshot page https://snapshot.org/#/cow.eth. For current proposal in the discussion phase, check the forum (https://forum.cow.fi)")
     } else if (contractAddress.test(message.content)) {
-      await message.reply(`Ethereum:
-  - CowDAO Safe: [\`eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662\`](https://gnosis-safe.io/app/eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662)
-  - Cow Token: [\`0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB\`](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB)
-  - vCOW: [\`0xD057B63f5E69CF1B929b356b579Cba08D7688048\`](https://etherscan.io/token/0xD057B63f5E69CF1B929b356b579Cba08D7688048)
-        
-Gnosis Chain:
-  - CowDAO Safe:  [\`gno:0xcA771eda0c70aA7d053aB1B25004559B918FE662\`](https://gnosis-safe.io/app/gno:0xcA771eda0c70aA7d053aB1B25004559B918FE662)
-  - Cow Token: [\`0x177127622c4A00F3d409B75571e12cB3c8973d3c\`](https://blockscout.com/xdai/mainnet/token/0x177127622c4A00F3d409B75571e12cB3c8973d3c)
-  - vCOW: [\`0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB\`](https://blockscout.com/xdai/mainnet/token/0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB)
-  `)
+      await message.channel.send({ embeds: [ADDRESSES_EMBEDDED_MSG] })
     } else if (totalSupply.test(message.content)) {
       await message.reply(
         "vCOW's total supply is 1 Billion.\n\nKeep in mind not everything will be in circulation because most will have a 4 year vesting period. For more info, check https://forum.gnosis.io/t/gip-13-phase-2-cowdao-and-cow-token/2735",
