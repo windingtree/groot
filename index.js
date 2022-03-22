@@ -138,7 +138,9 @@ client.on('messageCreate', async (message) => {
       await message.delete()
     } else if (noHello.test(message.content)) {
       await message.reply(
-        `${helloMsgReply(message.content)} nice to see you too! Next time please move your \`hi\` messages to the #gm channel`,
+        `${helloMsgReply(
+          message.content,
+        )} nice to see you too! Next time please move your \`hi\` messages to the #gm channel`,
       )
       await message.delete()
     } else if (whereToken.test(message.content)) {
@@ -153,14 +155,16 @@ client.on('messageCreate', async (message) => {
       isTradeable.test(message.content)
     ) {
       await message.reply(
-        'The vote to swap vCOW for transferable COW is live! Participate in the voting here :point_right: https://snapshot.org/#/cow.eth/proposal/0x7f2d0e26225fec1dd19ae4870532a09014a69f2d973dde0a7b8296d556f221df.\nIf the proposal passes vCOW becomes swappable on March 28th!'
+        'The vote to swap vCOW for transferable COW is live! Participate in the voting here :point_right: https://snapshot.org/#/cow.eth/proposal/0x7f2d0e26225fec1dd19ae4870532a09014a69f2d973dde0a7b8296d556f221df.\nIf the proposal passes vCOW becomes swappable on March 28th!',
       )
     } else if (wenMoon.test(message.content)) {
       await message.reply(pickMoon())
     } else if (wenLambo.test(message.content)) {
       await message.reply(pickLambo())
     } else if (wenVote.test(message.content)) {
-      await message.reply("Any active vote will be visible on the snapshot page https://snapshot.org/#/cow.eth. For current proposal in the discussion phase, check the forum (https://forum.cow.fi)")
+      await message.reply(
+        'Any active vote will be visible on the snapshot page https://snapshot.org/#/cow.eth. For current proposal in the discussion phase, check the forum (https://forum.cow.fi)',
+      )
     } else if (contractAddress.test(message.content)) {
       await message.channel.send({ embeds: [ADDRESSES_EMBEDDED_MSG] })
     } else if (totalSupply.test(message.content)) {
