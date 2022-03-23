@@ -32,6 +32,7 @@ const sellToken = /.*(where|how|wh?en).*(sell).*/i
 const tokenPrice = /.*(what)?.*(token)? price.*/i
 const wenMoon = /.*(wh?en|where).*mo+n.*/i
 const wenLambo = /.*(wh?en|where).*lambo.*/i
+const meaningOfLife = /.*meaning of life.*/i
 const contractAddress = /.*contract .*address.*/i
 const totalSupply = /.*(total|max|maximum|token) supply.*/i
 const addGChain = /.*add (gchain|gnosis ?chain|xdai)( to (mm|metamask|mmask|wallet))?.*/i
@@ -52,6 +53,12 @@ const wenLamboGifs = [
   'https://cdn.discordapp.com/attachments/941725405554024539/941768562509500446/ezgif.com-gif-maker_73.gif',
 ]
 
+const meaningOfLifeGifs = [
+  'https://pa1.narvii.com/6331/0e0ef4cfaf24742e0ca39e79a4df2a1aff6f928c_hq.gif',
+  'https://i.giphy.com/media/dYgDRfc61SGtO/giphy.webp',
+  'https://i.giphy.com/media/OY9XK7PbFqkNO/giphy.webp',
+]
+
 function pickFromList(list) {
   let count = -1
   return () => {
@@ -65,6 +72,7 @@ function pickFromList(list) {
 
 const pickMoon = pickFromList(wenMoonGifs)
 const pickLambo = pickFromList(wenLamboGifs)
+const pickMeaningOfLife = pickFromList(meaningOfLifeGifs)
 
 function codeBlock(message) {
   return '```' + message + '```'
@@ -161,6 +169,8 @@ client.on('messageCreate', async (message) => {
       await message.reply(pickMoon())
     } else if (wenLambo.test(message.content)) {
       await message.reply(pickLambo())
+    } else if (meaningOfLife.test(message.content)) {
+      await message.reply(pickMeaningOfLife())
     } else if (wenVote.test(message.content)) {
       await message.reply(
         'Any active vote will be visible on the snapshot page https://snapshot.org/#/cow.eth. For current proposal in the discussion phase, check the forum (https://forum.cow.fi)',
