@@ -33,7 +33,7 @@ const tokenPrice = /.*(what)?.*(token)? price.*/i
 const wenMoon = /.*(wh?en|where).*mo+n.*/i
 const wenLambo = /.*(wh?en|where).*lambo.*/i
 const meaningOfLife = /.*meaning of life.*/i
-const contractAddress = /.*contract .*address.*/i
+const contractAddress = /.*(contract|token) .*address.*/i
 const totalSupply = /.*(total|max|maximum|token) supply.*/i
 const addGChain = /.*add (gchain|gnosis ?chain|xdai)( to (mm|metamask|mmask|wallet))?.*/i
 
