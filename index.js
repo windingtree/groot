@@ -151,20 +151,6 @@ client.on('messageCreate', async (message) => {
         )} nice to see you too! Next time please move your \`hi\` messages to the #gm channel`,
       )
       await message.delete()
-    } else if (whereToken.test(message.content)) {
-      await message.reply('https://cowswap.exchange/#/claim')
-    } else if (howToClaim.test(message.content)) {
-      await message.reply(
-        'Follow the instructions on https://medium.com/@cow-protocol/step-by-step-guide-for-claiming-vcow-in-gnosis-chain-b1a1442a3454',
-      )
-    } else if (
-      whenTrade.test(message.content) ||
-      sellToken.test(message.content) ||
-      isTradeable.test(message.content)
-    ) {
-      await message.reply(
-        'The vote to swap vCOW for transferable COW is live! Participate in the voting here :point_right: https://snapshot.org/#/cow.eth/proposal/0x7f2d0e26225fec1dd19ae4870532a09014a69f2d973dde0a7b8296d556f221df.\nIf the proposal passes vCOW becomes swappable on March 28th!',
-      )
     } else if (wenMoon.test(message.content)) {
       await message.reply(pickMoon())
     } else if (wenLambo.test(message.content)) {
