@@ -33,6 +33,7 @@ const tokenPrice = /.*(what)?.*(token)? price.*/i
 const wenMoon = /.*(wh?en|where).*mo+n.*/i
 const wenLambo = /.*(wh?en|where).*lambo.*/i
 const meaningOfLife = /.*meaning of life.*/i
+const wenBinance = /.*wh?en binance.*/i
 const contractAddress = /.*(contract|token) .*address.*/i
 const totalSupply = /.*(total|max|maximum|token) supply.*/i
 const addGChain = /.*add (gchain|gnosis ?chain|xdai)( to (mm|metamask|mmask|wallet))?.*/i
@@ -60,6 +61,13 @@ const meaningOfLifeGifs = [
   'https://i.giphy.com/media/OY9XK7PbFqkNO/giphy.webp',
 ]
 
+const dunnoGifs = [
+  'https://i.giphy.com/media/Ll2fajzk9DgaY/giphy.webp',
+  'https://media3.giphy.com/media/3ornjSL2sBcPflIDiU/giphy.gif?cid=790b7611a6dda9fdddbbdf71cdfa0e041f5b7ca24c516d90&rid=giphy.gif&ct=g',
+  'https://i.giphy.com/media/y65VoOlimZaus/giphy.webp',
+  'https://i.giphy.com/media/4HnRkHk77nStQSGxgi/giphy.webp',
+]
+
 function pickFromList(list) {
   let count = -1
   return () => {
@@ -74,6 +82,7 @@ function pickFromList(list) {
 const pickMoon = pickFromList(wenMoonGifs)
 const pickLambo = pickFromList(wenLamboGifs)
 const pickMeaningOfLife = pickFromList(meaningOfLifeGifs)
+const pickDunno = pickFromList(dunnoGifs)
 
 function codeBlock(message) {
   return '```' + message + '```'
@@ -158,6 +167,8 @@ client.on('messageCreate', async (message) => {
       await message.reply(pickLambo())
     } else if (meaningOfLife.test(message.content)) {
       await message.reply(pickMeaningOfLife())
+    } else if (wenBinance.test(message.content)) {
+      await message.reply(pickDunno())
     } else if (wenVote.test(message.content)) {
       await message.reply(
         'Any active vote will be visible on the snapshot page https://snapshot.org/#/cow.eth. For current proposal in the discussion phase, check the forum (https://forum.cow.fi)',
@@ -174,7 +185,7 @@ client.on('messageCreate', async (message) => {
       )
     } else if (howToSwap.test(message.content)) {
       await message.reply(
-        'Go to https://cowswap.exchange/#/profile and click on `Convert to COW`.\nKeep in mind you\'ll only see the button if you have vested vCOW tokens.'
+        "Go to https://cowswap.exchange/#/profile and click on `Convert to COW`.\nKeep in mind you'll only see the button if you have vested vCOW tokens.",
       )
     }
   } catch (e) {
