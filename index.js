@@ -36,6 +36,7 @@ const meaningOfLife = /.*meaning of life.*/i
 const contractAddress = /.*(contract|token) .*address.*/i
 const totalSupply = /.*(total|max|maximum|token) supply.*/i
 const addGChain = /.*add (gchain|gnosis ?chain|xdai)( to (mm|metamask|mmask|wallet))?.*/i
+const howToSwap = /.*(how (to )?transfer|vCOW to COW|convert vCOW|swap vCOW).*/i
 
 const wenMoonGifs = [
   'https://cdn.discordapp.com/attachments/941725405554024539/942843922483413042/ezgif.com-gif-maker_78.gif',
@@ -170,6 +171,10 @@ client.on('messageCreate', async (message) => {
     } else if (addGChain.test(message.content)) {
       await message.reply(
         'To add Gnosis Chain to your wallet:\n1. go to https://chainlist.org/\n2. Search for Gnosis Chain\n3. Connect your wallet\n4. Click on "Add to Metamask"',
+      )
+    } else if (howToSwap.test(message.content)) {
+      await message.reply(
+        'Go to https://cowswap.exchange/#/profile and click on `Convert to COW`.\nKeep in mind you\'ll only see the button if you have vested vCOW tokens.'
       )
     }
   } catch (e) {
