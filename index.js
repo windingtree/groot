@@ -1,5 +1,4 @@
 const { Client, Intents, DMChannel, MessageEmbed } = require('discord.js')
-const cowsay = require('cowsay')
 
 const client = new Client({
   intents: [
@@ -37,14 +36,11 @@ const wenBinance = /.*wh?en binance.*/i
 const contractAddress = /.*(contract|token) .*address.*/i
 const totalSupply = /.*(total|max|maximum|token) supply.*/i
 const addGChain = /.*add (gchain|gnosis ?chain|xdai)( to (mm|metamask|mmask|wallet))?.*/i
-const howToSwap = /.*(how (to )?transfer|vCOW to COW|convert vCOW|swap vCOW).*/i
+const howToSwap = /.*(how (to )?swap|LIF1 to LIF2).*/i
 
 const wenMoonGifs = [
-  'https://cdn.discordapp.com/attachments/941725405554024539/942843922483413042/ezgif.com-gif-maker_78.gif',
-  'https://cdn.discordapp.com/attachments/869170255266734103/941755575073660959/44aafe91f10b22af690ccb7513d03779.gif',
   'https://c.tenor.com/YZWhYF-xV4kAAAAd/when-moon-admin.gif',
   'https://c.tenor.com/x-kqDAmw2NQAAAAC/parrot-party.gif',
-  'https://cdn.discordapp.com/attachments/941725405554024539/941764782711767120/ezgif.com-gif-maker_72.gif',
   'https://c.tenor.com/R6Zf7aUegagAAAAd/lambo.gif',
 ]
 
@@ -52,7 +48,6 @@ const wenLamboGifs = [
   'https://c.tenor.com/5bScutaRZWgAAAAd/travolta-safemoon.gif',
   'https://c.tenor.com/_dae-kRV6jUAAAAS/lambo-cardboard.gif',
   'https://c.tenor.com/R6Zf7aUegagAAAAd/lambo.gif',
-  'https://cdn.discordapp.com/attachments/941725405554024539/941768562509500446/ezgif.com-gif-maker_73.gif',
 ]
 
 const meaningOfLifeGifs = [
@@ -97,20 +92,19 @@ function helloMsgReply(msg) {
 }
 
 const ADDRESSES_EMBEDDED_MSG = new MessageEmbed()
-  .setTitle('CowDAO relevant addresses')
+  .setTitle('WindingTree relevant addresses')
   .addField(
     'Ethereum',
     `
-  - CowDAO Safe: [\`eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662\`](https://gnosis-safe.io/app/eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662)
-  - COW Token: [\`0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB\`](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB)
-  - vCOW: [\`0xD057B63f5E69CF1B929b356b579Cba08D7688048\`](https://etherscan.io/token/0xD057B63f5E69CF1B929b356b579Cba08D7688048)`,
+  - Community multisig Safe: [\`eth:0x876969b13dcf884C13D4b4f003B69229E6b7966A\`](https://gnosis-safe.io/app/eth:0x876969b13dcf884C13D4b4f003B69229E6b7966A)
+  - LIF2 Token: [\`0x9c38688e5acb9ed6049c8502650db5ac8ef96465\`](https://etherscan.io/token/0x9c38688e5acb9ed6049c8502650db5ac8ef96465)
+  - LIF1 Token: [\`0xEB9951021698B42e4399f9cBb6267Aa35F82D59D\`](https://etherscan.io/token/0xEB9951021698B42e4399f9cBb6267Aa35F82D59D) **DEPRECATED**`
   )
   .addField(
     'Gnosis Chain',
     `
-  - CowDAO Safe:  [\`gno:0xcA771eda0c70aA7d053aB1B25004559B918FE662\`](https://gnosis-safe.io/app/gno:0xcA771eda0c70aA7d053aB1B25004559B918FE662)
-  - COW Token: [\`0x177127622c4A00F3d409B75571e12cB3c8973d3c\`](https://blockscout.com/xdai/mainnet/token/0x177127622c4A00F3d409B75571e12cB3c8973d3c)
-  - vCOW: [\`0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB\`](https://blockscout.com/xdai/mainnet/token/0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB)
+  - Community multisig Safe:  [\`gno:0x07AED86bda7B36079296C1D94C12d6F48Beeb86C\`](https://gnosis-safe.io/app/gno:0x07AED86bda7B36079296C1D94C12d6F48Beeb86C)
+  - LIF2 Token: [\`0x2E9D0492A53eE882918c6db662aC37a4F344db93\`](https://blockscout.com/xdai/mainnet/token/0x2E9D0492A53eE882918c6db662aC37a4F344db93)
   `,
   )
 
@@ -125,40 +119,23 @@ client.on('messageCreate', async (message) => {
       return
     }
     if (message.channel instanceof DMChannel) {
-      message.reply(
-        codeBlock(cowsay.say({ text: "I am a bot and can't reply, beep bop" })),
-      )
+      await message.reply(`I am a bot and can't reply, beep bop`)
       return
     }
 
-    if (verifyCommand.test(message.content)) {
-      await message.reply('You are close, buddy. Try `/verify` instead')
-      await message.delete()
-    } else if (noCommands.test(message.content)) {
-      await message.reply(
-        'Not a valid command. Maybe try `/verify` on #verify-here ?',
-      )
-
-      if (secretChannel.test(message.content)) {
-        const dmChannel = await message.author.createDM()
-        await dmChannel.send(
-          codeBlock(cowsay.say({ text: 'There is no #cow-level 🤫', p: true })),
-        )
-      }
-      await message.delete()
-    } else if (noChannelTags.test(message.content)) {
+    if (noChannelTags.test(message.content)) {
       await message.reply('Please stop tagging channels with no reason')
       await message.delete()
     } else if (noGmAllowed.test(message.content)) {
       await message.reply(
-        'Please mooooove your `gm` and `gn` to the #gm channel',
+        'Please move your `gm` and `gn` to the #🌅-gm channel',
       )
       await message.delete()
     } else if (noHello.test(message.content)) {
       await message.reply(
         `${helloMsgReply(
           message.content,
-        )} nice to see you too! Next time please move your \`hi\` messages to the #gm channel`,
+        )} nice to see you too! Next time please move your \`hi\` messages to the #🌅-gm channel`,
       )
       await message.delete()
     } else if (wenMoon.test(message.content)) {
@@ -171,13 +148,13 @@ client.on('messageCreate', async (message) => {
       await message.reply(pickDunno())
     } else if (wenVote.test(message.content)) {
       await message.reply(
-        'Any active vote will be visible on the snapshot page https://snapshot.org/#/cow.eth. For current proposal in the discussion phase, check the forum (https://forum.cow.fi)',
+        'Any active vote will be visible on the snapshot page https://snapshot.org/#/windingtree.eth. For current proposal in the discussion phase, check the repo (https://github.com/windingtree/wips)',
       )
     } else if (contractAddress.test(message.content)) {
       await message.channel.send({ embeds: [ADDRESSES_EMBEDDED_MSG] })
     } else if (totalSupply.test(message.content)) {
       await message.reply(
-        "vCOW's total supply is 1 Billion.\n\nKeep in mind not everything will be in circulation because most will have a 4 year vesting period. For more info, check https://forum.gnosis.io/t/gip-13-phase-2-cowdao-and-cow-token/2735",
+        "LIF's total supply is 24,976,439.45. For more information, check https://etherscan.io/token/0x9c38688e5acb9ed6049c8502650db5ac8ef96465"
       )
     } else if (addGChain.test(message.content)) {
       await message.reply(
@@ -185,7 +162,7 @@ client.on('messageCreate', async (message) => {
       )
     } else if (howToSwap.test(message.content)) {
       await message.reply(
-        "Go to https://cowswap.exchange/#/profile and click on `Convert to COW`.\nKeep in mind you'll only see the button if you have vested vCOW tokens.",
+        "Go to https://lif.windingtree.com/.\n1. Connect your wallet (Metamask - if using trezor or ledger, connect these to Metamask)\n2. Approve LIF2 to exchange your tokens.\n3. Execute the swap from LIF1 to LIF2."
       )
     }
   } catch (e) {

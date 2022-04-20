@@ -1,13 +1,15 @@
 {
-  "name": "robot-cow-bot",
+  "name": "groot-bot",
   "version": "0.0.0",
-  "description": "Robot Cow Discord bot",
+  "description": "Groot Discord bot",
   "main": "index.js",
-  "author": "alfetopito",
+  "author": "mfw78",
+  "contributors": [{
+    "name": "alfetopito"
+  }],
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "cowsay": "^1.5.0",
     "discord.js": "^13.3.1"
   },
   "engines": {
