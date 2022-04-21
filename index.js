@@ -33,6 +33,7 @@ const wenMoon = /.*(wh?en|where).*mo+n.*/i
 const wenLambo = /.*(wh?en|where).*lambo.*/i
 const meaningOfLife = /.*meaning of life.*/i
 const wenBinance = /.*wh?en binance.*/i
+const wenTracking = /.*wh?en tracking.*/i
 const contractAddress = /.*(contract|token) .*address.*/i
 const totalSupply = /.*(total|max|maximum|token) supply.*/i
 const addGChain = /.*add (gchain|gnosis ?chain|xdai)( to (mm|metamask|mmask|wallet))?.*/i
@@ -145,6 +146,8 @@ client.on('messageCreate', async (message) => {
     } else if (meaningOfLife.test(message.content)) {
       await message.reply(pickMeaningOfLife())
     } else if (wenBinance.test(message.content)) {
+      await message.reply(pickDunno())
+    } else if (wenTracking.test(message.content)) {
       await message.reply(pickDunno())
     } else if (wenVote.test(message.content)) {
       await message.reply(
