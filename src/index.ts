@@ -64,7 +64,7 @@ const dunnoGifs = [
   'https://i.giphy.com/media/4HnRkHk77nStQSGxgi/giphy.webp',
 ]
 
-function pickFromList(list) {
+function pickFromList(list: string | any[]) {
   let count = -1
   return () => {
     count += 1
@@ -80,11 +80,11 @@ const pickLambo = pickFromList(wenLamboGifs)
 const pickMeaningOfLife = pickFromList(meaningOfLifeGifs)
 const pickDunno = pickFromList(dunnoGifs)
 
-function codeBlock(message) {
+function codeBlock(message: string) {
   return '```' + message + '```'
 }
 
-function helloMsgReply(msg) {
+function helloMsgReply(msg: string) {
   if (msg.length < 2) {
     return 'Hi'
   }
@@ -109,7 +109,7 @@ const ADDRESSES_EMBEDDED_MSG = new MessageEmbed()
   `,
   )
 
-client.on('messageCreate', async (message) => {
+client.on('messageCreate', async (message: { author: { bot: any; tag: any }; type: string; channel: { send: (arg0: { embeds: any[] }) => any }; reply: (arg0: string) => any; content: string; delete: () => any }) => {
   try {
     if (message.author.bot) {
       console.log('Do not reply to bots', message.author.tag)

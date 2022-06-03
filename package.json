@@ -2,15 +2,17 @@
   "name": "groot-bot",
   "version": "0.0.0",
   "description": "Groot Discord bot",
-  "main": "index.js",
+  "main": "./dist/cjs/src/index.js",
   "author": "mfw78",
-  "contributors": [{
-    "name": "alfetopito"
-  }],
+  "contributors": [
+    {
+      "name": "alfetopito"
+    }
+  ],
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "discord.js": "^13.3.1"
+    "discord.js": "^13.7.0"
   },
   "engines": {
     "node": "*",
@@ -18,6 +20,31 @@
   },
   "scripts": {
     "test": "echo 'fuck off' && exit",
-    "start": "node index.js"
+    "start": "yarn ts-node ./src/index.ts",
+    "prepare": "husky install",
+    "commit": "git-cz -S",
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "build": "npm run tsc"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@types/node": "^17.0.38",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "conventional-changelog-cli": "^2.2.2",
+    "dotenv": "^16.0.1",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "git-cz": "^4.9.0",
+    "husky": "^8.0.1",
+    "prettier": "^2.6.2",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
   }
 }
