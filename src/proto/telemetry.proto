@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message Telemetry {
+  string timestamp = 1;
+  
+  // JSON or Payload wrapper
+  oneof json_payload_oneof {
+    string json = 2;
+    bytes payload = 3;
+  }
+}
