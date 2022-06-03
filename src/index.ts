@@ -141,7 +141,7 @@ const ADDRESSES_EMBEDDED_MSG = new MessageEmbed()
   `,
   )
 
-client.on('messageCreate', async (message: { author: { bot: any; tag: any }; type: string; channel: { send: (arg0: { embeds: any[] }) => any }; reply: (arg0: string) => any; content: string; delete: () => any }) => {
+client.on('messageCreate', async (message) => {
   try {
     if (message.author.bot) {
       log('Do not reply to bots', message.author.tag)
