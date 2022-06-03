@@ -21,7 +21,7 @@ export async function initWaku(): Promise<Waku> {
 
     setTimeout(reject, 10000);
     waku.libp2p.connectionManager.on("peer:connect", () => {
-      console.log('Peer connected')
+      log('Peer connected')
       resolve(null)
     });
   });
@@ -43,7 +43,7 @@ const client = new Client({
 client.login(process.env.BOT_TOKEN)
 
 client.on('ready', () => {
-  if (client.user) console.log(`Logged in as ${client.user.tag}!`)
+  if (client.user) log(`Logged in as ${client.user.tag}!`)
 })
 
 const noGmAllowed = /^(gn|gm)(\s+|$)/i
@@ -144,11 +144,11 @@ const ADDRESSES_EMBEDDED_MSG = new MessageEmbed()
 client.on('messageCreate', async (message: { author: { bot: any; tag: any }; type: string; channel: { send: (arg0: { embeds: any[] }) => any }; reply: (arg0: string) => any; content: string; delete: () => any }) => {
   try {
     if (message.author.bot) {
-      console.log('Do not reply to bots', message.author.tag)
+      log('Do not reply to bots', message.author.tag)
       return
     }
     if (message.type !== 'DEFAULT') {
-      console.log('Can only interact with default messages', message.type)
+      log('Can only interact with default messages', message.type)
       return
     }
     if (message.channel instanceof DMChannel) {
