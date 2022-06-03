@@ -12,7 +12,10 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "discord.js": "^13.7.0"
+    "@discordjs/rest": "^0.4.1",
+    "discord-api-types": "^0.33.2",
+    "discord.js": "^13.7.0",
+    "js-waku": "^0.24.0"
   },
   "engines": {
     "node": "*",

@@ -1,4 +1,36 @@
-const { Client, Intents, DMChannel, MessageEmbed } = require('discord.js')
+import { Client, Intents, DMChannel, MessageEmbed } from 'discord.js'
+import { Waku } from 'js-waku'
+
+// connect to waku
+export async function initWaku(): Promise<Waku> {
+  const waku = await Waku.create({
+    bootstrap: {
+      maxPeers: 6,
+      peers: [
+        '/dns4/node-01.us-east-1.waku.windingtree.com/tcp/443/wss/p2p/16Uiu2HAmHXSN2XDZXdy8Dvyty5LtT7iSnWLGLMPoYbBnHaKeURxb',
+        '/dns4/node-01.eu-central-1.waku.windingtree.com/tcp/443/wss/p2p/16Uiu2HAmV2PXCqrrjHbkceguC4Y2q7XgmzzYfjEgd69RvAU3wKvU',
+        '/dns4/node-01.ap-southeast-2.waku.windingtree.com/tcp/443/wss/p2p/16Uiu2HAmGdTv8abaCW2BHYUhGeH97x7epzzbRY1CsgPbKhiJUB6C'
+      ]
+    },
+  })
+  
+  // Wait to be connected to at least one peer
+  await new Promise((resolve, reject) => {
+    // If we are not connected to any peer within 10sec, let's just reject
+    // As we are not implementing connection management in this example
+
+    setTimeout(reject, 10000);
+    waku.libp2p.connectionManager.on("peer:connect", () => {
+      console.log('Peer connected')
+      resolve(null)
+    });
+  });
+
+  return waku
+}
+
+// connect to waku
+const waku = initWaku()
 
 const client = new Client({
   intents: [
@@ -11,7 +43,7 @@ const client = new Client({
 client.login(process.env.BOT_TOKEN)
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`)
+  if (client.user) console.log(`Logged in as ${client.user.tag}!`)
 })
 
 const noGmAllowed = /^(gn|gm)(\s+|$)/i
@@ -19,7 +51,7 @@ const noHello = /^(hi+|hey|hello|h?ola)!?\s*$/i
 const secretChannel = /^!join$/
 const noCommands = /^!/
 const verifyCommand = /^!verify/
-const noChannelTags = /^\s*\<#\d+\>\s*$/
+const noChannelTags = /^\s*\\<#\d+\\>\s*$/
 
 // auto-replies
 const whereToken = /.*where (to |.*)(claim|airdrop).*/i
@@ -39,32 +71,32 @@ const totalSupply = /.*(total|max|maximum|token) supply.*/i
 const addGChain = /.*add (gchain|gnosis ?chain|xdai)( to (mm|metamask|mmask|wallet))?.*/i
 const howToSwap = /.*(how (to )?swap|LIF1 to LIF2).*/i
 
-const wenMoonGifs = [
+const wenMoonGifs: string[] = [
   'https://c.tenor.com/YZWhYF-xV4kAAAAd/when-moon-admin.gif',
   'https://c.tenor.com/x-kqDAmw2NQAAAAC/parrot-party.gif',
   'https://c.tenor.com/R6Zf7aUegagAAAAd/lambo.gif',
 ]
 
-const wenLamboGifs = [
+const wenLamboGifs: string[] = [
   'https://c.tenor.com/5bScutaRZWgAAAAd/travolta-safemoon.gif',
   'https://c.tenor.com/_dae-kRV6jUAAAAS/lambo-cardboard.gif',
   'https://c.tenor.com/R6Zf7aUegagAAAAd/lambo.gif',
 ]
 
-const meaningOfLifeGifs = [
+const meaningOfLifeGifs: string[] = [
   'https://pa1.narvii.com/6331/0e0ef4cfaf24742e0ca39e79a4df2a1aff6f928c_hq.gif',
   'https://i.giphy.com/media/dYgDRfc61SGtO/giphy.webp',
   'https://i.giphy.com/media/OY9XK7PbFqkNO/giphy.webp',
 ]
 
-const dunnoGifs = [
+const dunnoGifs: string[] = [
   'https://i.giphy.com/media/Ll2fajzk9DgaY/giphy.webp',
   'https://media3.giphy.com/media/3ornjSL2sBcPflIDiU/giphy.gif?cid=790b7611a6dda9fdddbbdf71cdfa0e041f5b7ca24c516d90&rid=giphy.gif&ct=g',
   'https://i.giphy.com/media/y65VoOlimZaus/giphy.webp',
   'https://i.giphy.com/media/4HnRkHk77nStQSGxgi/giphy.webp',
 ]
 
-function pickFromList(list: string | any[]) {
+function pickFromList(list: string | string[]) {
   let count = -1
   return () => {
     count += 1
