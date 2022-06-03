@@ -29,7 +29,7 @@
     "prepare": "husky install",
     "commit": "git-cz -S",
     "tsc": "tsc -p tsconfig.json",
-    "build": "npm run tsc",
+    "build": "yarn protoc:local && npm run tsc",
     "protoc:local": "protoc --ts_out ./src/proto --proto_path ./src/proto ./src/proto/*.proto",
     "prepublish": "yarn protoc:local"
   },
