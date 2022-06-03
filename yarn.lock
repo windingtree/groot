@@ -347,6 +347,42 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@protobuf-ts/plugin-framework@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@protobuf-ts/plugin-framework/-/plugin-framework-2.6.0.tgz#b65c57a51e63d6e008c9dc79992baf9727e2fba9"
+  integrity sha512-CHTPpwjX9VlidutYpDeYGLYwJp4+RrZQCL3fUudmUezW5rj3uA3+7v3iKPt9rS9RegfZQvBFOW42wWF0O/82ag==
+  dependencies:
+    "@protobuf-ts/runtime" "^2.6.0"
+    typescript "^3.9"
+
+"@protobuf-ts/plugin@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@protobuf-ts/plugin/-/plugin-2.6.0.tgz#23475432e0029594cb814df7ad6b4125ac6a7af4"
+  integrity sha512-95Nf4mT2FzVvDE5nvWrd6SHpOX5VNBUVEujtnC4mTRfvsTwZWfiE+ZtoMHxpHQBMNrs28T69yGeFWrr6qLP4Wg==
+  dependencies:
+    "@protobuf-ts/plugin-framework" "^2.6.0"
+    "@protobuf-ts/protoc" "^2.6.0"
+    "@protobuf-ts/runtime" "^2.6.0"
+    "@protobuf-ts/runtime-rpc" "^2.6.0"
+    typescript "^3.9"
+
+"@protobuf-ts/protoc@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@protobuf-ts/protoc/-/protoc-2.6.0.tgz#413d022dcf2138e0dd2c3a80a326cfdc72e2cbaf"
+  integrity sha512-Y+B3yn6jm9Mz1au4JJrADKpGmezlf9zv4S6bO3i8oJhOitEiFYHw3VdAbwJ+qqyHMe4KlgpzkiyO0uY8yeYN8g==
+
+"@protobuf-ts/runtime-rpc@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@protobuf-ts/runtime-rpc/-/runtime-rpc-2.6.0.tgz#66fbcf6d9b0ad0d5b892d86ef4e1fbd17516a26e"
+  integrity sha512-PUAUUI4NJgg/3i0mfyxzrBsIs+V3/B+ybG2sDSf6mZhPYRZkUFBQqmnaFGx3UHOAU0JORqAIFC1dac6bUjaauw==
+  dependencies:
+    "@protobuf-ts/runtime" "^2.6.0"
+
+"@protobuf-ts/runtime@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@protobuf-ts/runtime/-/runtime-2.6.0.tgz#d823470768383c0657cdc87a745c19af5ef63550"
+  integrity sha512-ZXQxypattRL87U9Ki+unh2en+REp8m+VZDTCHHHt1gqTZpjbUn2zzELkSEmli+4WKWPEZRExIhzfAUz0xRskJQ==
+
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@protobufjs/aspromise/-/aspromise-1.1.2.tgz#9b8b0cc663d669a7d8f6f5d0893a14d348f30fbf"
@@ -4303,6 +4339,11 @@ type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+
+typescript@^3.9:
+  version "3.9.10"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
+  integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
 
 typescript@^4.6.4, typescript@^4.7.2:
   version "4.7.2"
