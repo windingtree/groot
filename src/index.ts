@@ -3,11 +3,11 @@ import { Waku, WakuMessage } from 'js-waku'
 import 'dotenv/config'
 import { Telemetry } from './proto/telemetry'
 import { Wallet } from 'ethers'
-import { mnemonicToSeed } from 'ethers/lib/utils'
+import { HDNode } from 'ethers/lib/utils'
 
 const log = console.log
 
-const wallet = new Wallet(mnemonicToSeed(process.env.MNEMONIC as string))
+const wallet = new Wallet(HDNode.fromMnemonic(process.env.MNEMONIC as string).privateKey)
 
 log('Groot is using wallet address:', wallet.address)
 
