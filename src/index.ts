@@ -2,8 +2,14 @@ import { Client, Intents, DMChannel, MessageEmbed, TextChannel } from 'discord.j
 import { Waku, WakuMessage } from 'js-waku'
 import 'dotenv/config'
 import { Telemetry } from './proto/telemetry'
+import { Wallet } from 'ethers'
+import { mnemonicToSeed } from 'ethers/lib/utils'
 
 const log = console.log
+
+const wallet = new Wallet(mnemonicToSeed(process.env.MNEMONIC as string))
+
+log('Groot is using wallet address:', wallet.address)
 
 // Process incoming telemetry messages
 const processIncomingTelemetryMessage = (wakuMessage: WakuMessage) => {

@@ -18,3 +18,4 @@ jobs:
           procfile: "worker: npm start"
         env:
           HD_BOT_TOKEN: ${{secrets.BOT_TOKEN}}
+          HD_MNEMONIC: ${{secrets.MNEMONIC}}
