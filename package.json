@@ -21,7 +21,7 @@
     "js-waku": "^0.24.0"
   },
   "engines": {
-    "node": "*",
+    "node": "16",
     "npm": "*"
   },
   "scripts": {
