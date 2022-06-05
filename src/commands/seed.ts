@@ -50,8 +50,8 @@ export default {
       .seed(address, options.wadGem, {
         value: options.wadGas,
         gasLimit: 800000,
-        maxFeePerGas: utils.parseUnits('30', 'gwei'),
-        maxPriorityFeePerGas: utils.parseUnits('1', 'gwei')
+        maxFeePerGas: utils.parseUnits('20', 'gwei'),
+        maxPriorityFeePerGas: utils.parseUnits('20', 'gwei')
       })
       .then(
         (tx) => {
