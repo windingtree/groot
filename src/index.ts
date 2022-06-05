@@ -5,7 +5,7 @@ import {
   MessageEmbed,
   TextChannel
 } from 'discord.js'
-import { utils as wUtils, Waku, WakuMessage } from 'js-waku'
+import { Waku, WakuMessage } from 'js-waku'
 import 'dotenv/config'
 import { Telemetry } from './proto/telemetry'
 import { BigNumberish, providers, utils, Wallet } from 'ethers'
@@ -32,7 +32,7 @@ const givers = new Map<number, Giver>()
 // add the giver contract for Sokol
 const sokolGiver = Giver__factory.connect(
   '0xb2BF9a28A7f92153686F94C71883f360D546a27C',
-  wallet.connect(new providers.JsonRpcProvider('https://sokol.poa.network	'))
+  wallet.connect(new providers.JsonRpcProvider('https://sokol.poa.network'))
 )
 givers.set(77, sokolGiver)
 

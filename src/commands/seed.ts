@@ -34,13 +34,13 @@ export default {
     const chain = interaction.options.getNumber('chain', false) || Number(77)
 
     if (!utils.isAddress(address)) {
-      interaction.followUp({
+      await interaction.followUp({
         content: 'Invalid ethereum address',
         ephemeral: true
       })
       return
     } else if (!givers.has(chain)) {
-      interaction.followUp({ content: 'Invalid chain', ephemeral: true })
+      await interaction.followUp({ content: 'Invalid chain', ephemeral: true })
       return
     }
 
