@@ -10,6 +10,9 @@ import 'dotenv/config'
 import { Telemetry } from './proto/telemetry'
 import { Wallet } from 'ethers'
 import { HDNode } from 'ethers/lib/utils'
+import ping from './commands/ping'
+import server from './commands/server'
+import user from './commands/user'
 
 const log = console.log
 
@@ -190,19 +193,20 @@ const ADDRESSES_EMBEDDED_MSG = new MessageEmbed()
   `
   )
 
-client.on('interactionCreate', async interaction => {
-  if (!interaction.isCommand()) return;
+// Slash commands
+client.on('interactionCreate', async (interaction) => {
+  if (!interaction.isCommand()) return
 
-  const { commandName } = interaction;
+  const { commandName } = interaction
 
   if (commandName === 'ping') {
-    await interaction.reply('Pong!');
+    ping.execute(interaction);
   } else if (commandName === 'server' && interaction.guild) {
-    await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
+    server.execute(interaction);
   } else if (commandName === 'user') {
-    await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
+    user.execute(interaction)
   }
-});
+})
 
 client.on('messageCreate', async (message) => {
   try {
