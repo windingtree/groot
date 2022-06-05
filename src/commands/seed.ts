@@ -48,27 +48,33 @@ export default {
     const contract = givers.get(chain) as Giver
     contract
       .seed(address, options.wadGem, {
-        value: options.wadGas
+        value: options.wadGas,
+        gasLimit: 800000,
+        maxFeePerGas: utils.parseUnits('30', 'gwei'),
+        maxPriorityFeePerGas: utils.parseUnits('1', 'gwei')
       })
       .then(
         (tx) => {
-          interaction.reply({ content: `Transaction sent: ${tx.hash}` })
+          interaction.reply({ content: `Transaction sent: ${tx.hash}`, ephemeral: true })
           tx.wait(1).then(
             (receipt) => {
               interaction.followUp({
-                content: `Transaction successfully processed at block ${receipt.blockNumber}`
+                content: `Transaction successfully processed at block ${receipt.blockNumber}`,
+                ephemeral: true
               })
             },
             (e) => {
               interaction.followUp({
-                content: `Transaction was not successfully mined: ${e}`
+                content: `Transaction was not successfully mined: ${e}`,
+                ephemeral: true
               })
             }
           )
         },
         (e) => {
           interaction.reply({
-            content: `Transaction was not successfully sent to RPC: ${e}`
+            content: `Transaction was not successfully sent to RPC: ${e}`,
+            ephemeral: true
           })
         }
       )
