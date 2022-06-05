@@ -34,13 +34,13 @@ export default {
     const chain = interaction.options.getNumber('chain', false) || Number(77)
 
     if (!utils.isAddress(address)) {
-      await interaction.followUp({
+      await interaction.reply({
         content: 'Invalid ethereum address',
         ephemeral: true
       })
       return
     } else if (!givers.has(chain)) {
-      await interaction.followUp({ content: 'Invalid chain', ephemeral: true })
+      await interaction.reply({ content: 'Invalid chain', ephemeral: true })
       return
     }
 
@@ -52,7 +52,7 @@ export default {
       })
       .then(
         (tx) => {
-          interaction.followUp({ content: `Transaction sent: ${tx.hash}` })
+          interaction.reply({ content: `Transaction sent: ${tx.hash}` })
           tx.wait(1).then(
             (receipt) => {
               interaction.followUp({
@@ -67,12 +67,10 @@ export default {
           )
         },
         (e) => {
-          interaction.followUp({
+          interaction.reply({
             content: `Transaction was not successfully sent to RPC: ${e}`
           })
         }
       )
-
-    await interaction.reply('Pong!')
   }
 }
