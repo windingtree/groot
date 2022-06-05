@@ -5,20 +5,42 @@ import {
   MessageEmbed,
   TextChannel
 } from 'discord.js'
-import { Waku, WakuMessage } from 'js-waku'
+import { utils as wUtils, Waku, WakuMessage } from 'js-waku'
 import 'dotenv/config'
 import { Telemetry } from './proto/telemetry'
-import { Wallet } from 'ethers'
+import { BigNumberish, providers, utils, Wallet } from 'ethers'
 import { HDNode } from 'ethers/lib/utils'
 import ping from './commands/ping'
 import server from './commands/server'
 import user from './commands/user'
+import seed from './commands/seed'
+import { Giver, Giver__factory } from './typechain'
+
+export interface GiveOptions {
+  wadGem: BigNumberish
+  wadGas: BigNumberish
+}
 
 const log = console.log
 
 const wallet = new Wallet(
   HDNode.fromMnemonic(process.env.MNEMONIC as string).privateKey
 )
+
+const givers = new Map<number, Giver>()
+
+// add the giver contract for Sokol
+const sokolGiver = Giver__factory.connect(
+  '0xb2BF9a28A7f92153686F94C71883f360D546a27C',
+  wallet.connect(new providers.JsonRpcProvider('https://sokol.poa.network	'))
+)
+givers.set(77, sokolGiver)
+
+// set default giving options
+const giveOptions: GiveOptions = {
+  wadGem: utils.parseEther('1000'),
+  wadGas: utils.parseEther('0.1')
+}
 
 log('Groot is using wallet address:', wallet.address)
 
@@ -200,11 +222,13 @@ client.on('interactionCreate', async (interaction) => {
   const { commandName } = interaction
 
   if (commandName === 'ping') {
-    ping.execute(interaction);
+    ping.execute(interaction)
   } else if (commandName === 'server' && interaction.guild) {
-    server.execute(interaction);
+    server.execute(interaction)
   } else if (commandName === 'user') {
     user.execute(interaction)
+  } else if (commandName === 'seed') {
+    seed.execute(interaction, givers, giveOptions)
   }
 })
 
