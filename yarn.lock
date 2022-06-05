@@ -678,6 +678,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@openzeppelin/contracts@^4.5.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.6.0.tgz#c91cf64bc27f573836dba4122758b4743418c1b3"
+  integrity sha512-8vi4d50NNya/bQqCmaVzvHNmwHvS0OBKb7HNtuNwEE3scXWrP31fKQoGxNMT+KbzmrNZzatE3QK5p2gFONI/hg==
+
 "@protobuf-ts/plugin-framework@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@protobuf-ts/plugin-framework/-/plugin-framework-2.6.0.tgz#b65c57a51e63d6e008c9dc79992baf9727e2fba9"
@@ -1125,6 +1130,13 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@vascosantos/moving-average/-/moving-average-1.1.0.tgz#8d5793b09b2d6021ba5e620c6a0f876c20db7eaa"
   integrity sha512-MVEJ4vWAPNbrGLjz7ITnHYg+YXZ6ijAqtH5/cHwSoCpbvuJ98aLXwFfPKAUfZpJMQR5uXB58UJajbY130IRF/w==
+
+"@windingtree/videre-contracts@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@windingtree/videre-contracts/-/videre-contracts-1.0.1.tgz#86ce041613c2cd9ad656cc2492a4c6794a0a32db"
+  integrity sha512-tKZZdsIBDvstWVMs5pPZFVXq7m87JWsHY8b7o/drhetckjXYikOWYmqAya5WZHUyRBmpu05tu3w7ntkdSb20bw==
+  dependencies:
+    "@openzeppelin/contracts" "^4.5.0"
 
 JSONStream@^1.0.4:
   version "1.3.5"
