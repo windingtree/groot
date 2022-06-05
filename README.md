@@ -6,10 +6,10 @@ Discord BOT
 
 ## Required env vars
 
-* **BOT_TOKEN**: Discord bot token
-* **HEROKU_API_KEY**: API key for the deploying heroku account
-* **HEROKU_APP_NAME**: Unique app name for deployment
-* **HEROKU_EMAIL**: Email account associated with heroku account
+- **BOT_TOKEN**: Discord bot token
+- **HEROKU_API_KEY**: API key for the deploying heroku account
+- **HEROKU_APP_NAME**: Unique app name for deployment
+- **HEROKU_EMAIL**: Email account associated with heroku account
 
 ## Running
 
