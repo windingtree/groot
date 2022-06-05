@@ -49,9 +49,9 @@ export default {
     contract
       .seed(address, options.wadGem, {
         value: options.wadGas,
-        gasLimit: 800000,
-        maxFeePerGas: utils.parseUnits('20', 'gwei'),
-        maxPriorityFeePerGas: utils.parseUnits('20', 'gwei')
+        // gasLimit: 800000,
+        // maxFeePerGas: utils.parseUnits('20', 'gwei'),
+        // maxPriorityFeePerGas: utils.parseUnits('20', 'gwei')
       })
       .then(
         (tx) => {
@@ -65,7 +65,7 @@ export default {
             },
             (e) => {
               interaction.followUp({
-                content: `Transaction was not successfully mined: ${e}`,
+                content: `Transaction failed`,
                 ephemeral: true
               })
             }
