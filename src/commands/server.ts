@@ -1,5 +1,5 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { CacheType, CommandInteraction } from 'discord.js'
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { CacheType, CommandInteraction } from 'discord.js';
 
 export default {
   data: new SlashCommandBuilder()
@@ -9,7 +9,7 @@ export default {
     if (interaction.guild) {
       await interaction.reply(
         `Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`
-      )
+      );
     }
   }
-}
+};

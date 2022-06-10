@@ -1,18 +1,18 @@
-import { REST } from '@discordjs/rest'
-import { Routes } from 'discord-api-types/v9'
-import 'dotenv/config'
-import ping from '../src/commands/ping'
-import seed from '../src/commands/seed'
-import server from '../src/commands/server'
-import user from '../src/commands/user'
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v9';
+import 'dotenv/config';
+import ping from '../src/commands/ping';
+import seed from '../src/commands/seed';
+import server from '../src/commands/server';
+import user from '../src/commands/user';
 
 const commands = [ping.data, server.data, user.data, seed.data].map((command) =>
   command.toJSON()
-)
+);
 
 const rest = new REST({ version: '9' }).setToken(
   process.env.BOT_TOKEN as string
-)
+);
 
 rest
   .put(
@@ -23,4 +23,4 @@ rest
     { body: commands }
   )
   .then(() => console.log('Successfully registered application commands.'))
-  .catch(console.error)
+  .catch(console.error);

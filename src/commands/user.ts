@@ -1,5 +1,5 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { CacheType, CommandInteraction } from 'discord.js'
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { CacheType, CommandInteraction } from 'discord.js';
 
 export default {
   data: new SlashCommandBuilder()
@@ -8,6 +8,6 @@ export default {
   async execute(interaction: CommandInteraction<CacheType>) {
     await interaction.reply(
       `Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`
-    )
+    );
   }
-}
+};

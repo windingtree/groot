@@ -6,7 +6,7 @@ import { Contracts } from '..';
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('seed')
+    .setName('whitelist')
     .setDescription('Whitelist an address')
     .addStringOption((option) =>
       option
