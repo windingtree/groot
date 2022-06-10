@@ -16,25 +16,25 @@ export default (
   return (wakuMessage: WakuMessage) => {
     // No need to attempt to decode a message if the payload is absent
     log('Message received');
-    if (!wakuMessage.payload) return;
+    // if (!wakuMessage.payload) return;
 
-    const msg: Telemetry = Telemetry.fromBinary(wakuMessage.payload);
+    // const msg: Telemetry = Telemetry.fromBinary(wakuMessage.payload);
 
     if (client.isReady()) {
       client.channels.fetch('966250783291101235').then((channel) => {
-        if (msg.jsonPayloadOneof.oneofKind === 'json') {
+        // if (msg.jsonPayloadOneof.oneofKind === 'json') {
           const TELEMETRY_EMBEDDED_MSG = new MessageEmbed()
             .setTitle('Videre Telemetry')
-            .addField('Sending timestamp', msg.timestamp)
-            .addField('Receiving timestamp', new Date().toISOString())
-            .addField('Content topic', wakuMessage.contentTopic || 'None')
-            .addField(
-              'Parameters',
-              codeBlock('json', msg.jsonPayloadOneof.json)
-            );
+            // .addField('Sending timestamp', msg.timestamp)
+            // .addField('Receiving timestamp', new Date().toISOString())
+            .addField('Content topic', wakuMessage.contentTopic || 'None');
+            // .addField(
+            //   'Parameters',
+            //   codeBlock('json', msg.jsonPayloadOneof.json)
+            // );
 
           (channel as TextChannel).send({ embeds: [TELEMETRY_EMBEDDED_MSG] });
-        }
+        // }
       });
     }
   };

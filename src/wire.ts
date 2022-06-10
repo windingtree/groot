@@ -34,7 +34,8 @@ export default async (
 
   // display telemetry
   waku.relay.addObserver(telemetry(client, contracts, options), [
-    '/videre/stays/1/telemetry/proto'
+    ""
+    /*'/videre/stays/1/telemetry/proto'*/
   ]);
 
   // display and handle begging (they're after gas!)
