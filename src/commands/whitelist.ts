@@ -49,7 +49,7 @@ export default {
     // Input is valid, let's do the transaction
     const contract = (contracts.get(chain) as Contracts).serviceProviderRegistry;
     contract
-      .grantRole(utils.keccak256(utils.toUtf8Bytes('WHITELIST_ROLE')), address)
+      .grantRole(utils.keccak256(utils.toUtf8Bytes('videre.roles.whitelist')), address)
       .then(handler(interaction));
   }
 };
