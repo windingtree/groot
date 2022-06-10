@@ -5,6 +5,7 @@ import ping from './ping';
 import seed from './seed';
 import server from './server';
 import user from './user';
+import whitelist from './whitelist';
 
 export interface GiveOptions {
   wadGem: BigNumberish;
@@ -25,5 +26,7 @@ export default (contracts: Map<number, Contracts>, options: GiveOptions) =>
       user.execute(interaction);
     } else if (commandName === 'seed') {
       seed.execute(interaction, contracts, options);
+    } else if (commandName === 'whitelist') {
+      whitelist.execute(interaction, contracts, options)
     }
   };

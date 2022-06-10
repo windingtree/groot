@@ -5,8 +5,9 @@ import ping from '../src/commands/ping';
 import seed from '../src/commands/seed';
 import server from '../src/commands/server';
 import user from '../src/commands/user';
+import whitelist from '../src/commands/whitelist'
 
-const commands = [ping.data, server.data, user.data, seed.data].map((command) =>
+const commands = [ping.data, server.data, user.data, seed.data, whitelist.data].map((command) =>
   command.toJSON()
 );
 

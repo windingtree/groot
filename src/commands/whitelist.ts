@@ -33,6 +33,8 @@ export default {
     const address = interaction.options.getString('address') || '';
     const chain = interaction.options.getNumber('chain', false) || Number(77);
 
+    console.log('Processing whitelist request')
+
     if (!utils.isAddress(address)) {
       await interaction.reply({
         content: 'Invalid ethereum address',
