@@ -27,14 +27,16 @@
   },
   "scripts": {
     "typechain:videre": "npx typechain --target ethers-v5 --out-dir ./src/typechain './node_modules/@windingtree/videre-contracts/artifacts/contracts/**/*.json'",
-    "prepublish": "yarn typechain:videre && yarn protoc:local",
+    "prepublish": "yarn typechain:videre && yarn protoc",
     "test": "echo 'fuck off' && exit",
     "start": "node ./dist/cjs/index.js",
     "dev": "yarn ts-node ./src/index.ts",
     "prepare": "husky install",
     "commit": "git-cz -S",
     "tsc": "tsc -p tsconfig-build.json",
-    "build": "yarn protoc:local && npm run tsc",
+    "build": "yarn protoc && npm run tsc",
+    "protoc": "yarn protoc:libs && yarn protoc:local",
+    "protoc:libs": "cp -pR ./node_modules/@windingtree/stays-models/dist/proto/*.proto ./src/proto/",
     "protoc:local": "protoc --ts_out ./src/proto --proto_path ./src/proto ./src/proto/*.proto"
   },
   "devDependencies": {
@@ -46,6 +48,7 @@
     "@types/node": "^17.0.38",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
+    "@windingtree/stays-models": "^2.1.1",
     "@windingtree/videre-contracts": "^1.0.1",
     "conventional-changelog-cli": "^2.2.2",
     "eslint": "^8.16.0",

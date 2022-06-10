@@ -1,5 +1,46 @@
 node_modules
 dist
 .env
+.env.*
 src/proto/*.ts
 src/typechain*
+!.env.example
+
+# misc / ide
+.DS_Store
+*.swp
+*.db
+*.log
+.idea
+
+# database
+database
+
+# temp files
+temp
+cache
+.eslintcache
+
+# node
+node_modules
+package-lock.json
+coverage
+coverage.json
+lib
+dist
+
+# any generated protobufs
+src/proto/*.ts
+!src/proto/index.ts
+# also all non-compiled protobufs as none
+# of our own are stored here, except test.proto
+src/proto/*.proto
+!src/proto/test.proto
+
+# hardhat / typechain artifacts
+cache/
+typechain*/
+
+# preempt any keys
+*.keys
+*.key
