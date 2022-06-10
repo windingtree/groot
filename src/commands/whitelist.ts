@@ -33,8 +33,6 @@ export default {
     const address = interaction.options.getString('address') || '';
     const chain = interaction.options.getNumber('chain', false) || Number(77);
 
-    console.log('Processing whitelist request')
-
     if (!utils.isAddress(address)) {
       await interaction.reply({
         content: 'Invalid ethereum address',
@@ -50,28 +48,26 @@ export default {
     const contract = (contracts.get(chain) as Contracts).serviceProviderRegistry;
     contract
       .grantRole(utils.keccak256(utils.toUtf8Bytes('videre.roles.whitelist')), address)
-      .then(handler(interaction));
+      .then(successHandler(interaction))
+      .catch(failureHandler(interaction));
   }
 };
 
-
-const handler = (interaction: CommandInteraction<CacheType>) => (successHandler(interaction), failureHandler(interaction))
-
 const successHandler = (interaction: CommandInteraction<CacheType>) => (
-  (tx: ContractTransaction) => {
-    interaction.reply({
+  async (tx: ContractTransaction) => {
+    await interaction.reply({
       content: `Transaction sent: ${tx.hash}`,
       ephemeral: true
     });
     tx.wait(1).then(
-      (receipt) => {
-        interaction.followUp({
+      async (receipt) => {
+        await interaction.followUp({
           content: `Transaction successfully processed at block ${receipt.blockNumber}`,
           ephemeral: true
         });
       },
-      (e) => {
-        interaction.followUp({
+      async (e) => {
+        await interaction.followUp({
           content: `Transaction failed`,
           ephemeral: true
         });
@@ -81,8 +77,9 @@ const successHandler = (interaction: CommandInteraction<CacheType>) => (
 )
 
 const failureHandler = (interaction: CommandInteraction<CacheType>) => (
-  (e: any) => {
-    interaction.reply({
+  async (e: any) => {
+    console.log(e);
+    await interaction.reply({
       content: `Transaction was not successfully sent to RPC: ${e}`,
       ephemeral: true
     });
