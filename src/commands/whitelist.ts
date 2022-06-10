@@ -27,7 +27,7 @@ export default {
     ),
   async execute(
     interaction: CommandInteraction<CacheType>,
-    givers: Map<number, Contracts>,
+    contracts: Map<number, Contracts>,
     options: GiveOptions
   ) {
     const address = interaction.options.getString('address') || '';
@@ -39,17 +39,15 @@ export default {
         ephemeral: true
       });
       return;
-    } else if (!givers.has(chain)) {
+    } else if (!contracts.has(chain)) {
       await interaction.reply({ content: 'Invalid chain', ephemeral: true });
       return;
     }
 
     // Input is valid, let's do the transaction
-    const contract = (givers.get(chain) as Contracts).giver;
+    const contract = (contracts.get(chain) as Contracts).serviceProviderRegistry;
     contract
-      .seed(address, options.wadGem, {
-        value: options.wadGas
-      })
+      .grantRole(utils.keccak256(utils.toUtf8Bytes('WHITELIST_ROLE')), address)
       .then(handler(interaction));
   }
 };
